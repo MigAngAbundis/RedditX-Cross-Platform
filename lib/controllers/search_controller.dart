@@ -79,6 +79,7 @@ class SearchController with ChangeNotifier {
     ///web==> circular
     ///App==> rectangular
     borderRadius = isWeb ? 20.0 : 0.0;
+
     ///Initially ==> the icon is does not appear in we nut the close icon appears in App
     closeIcon =
         isWeb ? const Icon(null) : const Icon(Icons.close, color: Colors.grey);
@@ -168,6 +169,7 @@ class SearchController with ChangeNotifier {
 
     return fillColor;
   }
+
   ///detects the hover color of the search test field
   Color hoverColorTextField() {
     Color hovorColor =
@@ -208,6 +210,7 @@ class SearchController with ChangeNotifier {
             : false;
     notifyListeners();
   }
+
   ///detects whether [X] icon will appear or not
   closeIconAppearOrDisappear() {
     ///if the text is empty ==> close button disappear
@@ -233,10 +236,12 @@ class SearchController with ChangeNotifier {
     }
     notifyListeners();
   }
+
   ///Execures every change in the search text field
   onChangeTextField() {
     ///Detects the text direction according to the written text
     isRTLTextField();
+
     ///to detect whether to show the icon of delete or no ==>
     ///if the text in web is deleted ==> it will not be icon
     ///if a text is empty ==> make the close icon appear
@@ -310,11 +315,13 @@ class SearchController with ChangeNotifier {
     } else {
       lengthOfShowList = isWeb ? 5 : 3;
     }
+
     ///form a widget and add it to the list that will be shown
     ///the list size is max 5 in web , max 3 in Appp
     for (int i = 0; i < lengthOfShowList; i++) {
       searchHistoryWidget.add(
         SearchHistoryWidget(
+
             ///the index of the widget(i) is sent to it (will be used when delete the item)
             ///the text is sent from the front of the list of search hoistory
             myIndex: i,
@@ -610,18 +617,22 @@ class SearchController with ChangeNotifier {
   sendSearchRequest(String sort, String tab, int page) async {
     isLoading = true;
     notifyListeners();
+
     ///if the user selevts [posts](which is the default tab when we search)==>get posts
     if (tab == 'post') {
       await fillPostsList(searchInput, sortDropDownValue, tab, page);
     }
+
     ///if the user selevts [comments]==>get comments
     else if (tab == 'comment') {
       await fillCommentsList(searchInput, sortDropDownValue, tab, page);
     }
+
     ///if the user selevts [communities]==>get subreddits
     else if (tab == 'sr') {
       await fillCommunitiesList(searchInput, sortDropDownValue, tab, page);
     }
+
     ///if the user selevts [people]=>get usere
     else if (tab == 'user') {
       await fillUsersList(searchInput, sortDropDownValue, tab, page);

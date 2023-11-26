@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../controllers/search_controller.dart';
+import '../../../controllers/search_controller.dart' as searchCtrl;
 import '../../../styles/custom_icons.dart';
 
 ///the button of follow/unfollow in people searchr results
@@ -28,11 +28,11 @@ class FollowJoinButtonWidget extends StatelessWidget {
       //when hover the button with mouse
       onHover: (val) {
         isPeopleWidget
-            ? Provider.of<SearchController>(
+            ? Provider.of<searchCtrl.SearchController>(
                 context,
                 listen: false,
               ).onHoverFollowButton(index)
-            : Provider.of<SearchController>(
+            : Provider.of<searchCtrl.SearchController>(
                 context,
                 listen: false,
               ).onHoverJoinButton(index);
@@ -40,11 +40,11 @@ class FollowJoinButtonWidget extends StatelessWidget {
       //when exit hover with mouse
       onExit: (val) {
         isPeopleWidget
-            ? Provider.of<SearchController>(
+            ? Provider.of<searchCtrl.SearchController>(
                 context,
                 listen: false,
               ).onExitFollowButton(index)
-            : Provider.of<SearchController>(
+            : Provider.of<searchCtrl.SearchController>(
                 context,
                 listen: false,
               ).onExitJoinButton(index);
@@ -56,11 +56,11 @@ class FollowJoinButtonWidget extends StatelessWidget {
         //call onPressing function from controller
         onPressed: () {
           isPeopleWidget
-              ? Provider.of<SearchController>(
+              ? Provider.of<searchCtrl.SearchController>(
                   context,
                   listen: false,
                 ).onPressingFollowButton(index)
-              : Provider.of<SearchController>(
+              : Provider.of<searchCtrl.SearchController>(
                   context,
                   listen: false,
                 ).onPressingJoinButton(index);
@@ -81,28 +81,31 @@ class FollowJoinButtonWidget extends StatelessWidget {
                     child: Text(
                       style: const TextStyle(color: Colors.black),
                       isPeopleWidget
-                          ? Provider.of<SearchController>(context,
+                          ? Provider.of<searchCtrl.SearchController>(context,
                                       listen: false)
                                   .isFollowing[index]
-                              ? Provider.of<SearchController>(context,
+                              ? Provider.of<searchCtrl.SearchController>(context,
                                           listen: false)
                                       .isWeb
                                   ? '  Successfully followed $communityOrUserName'
                                   : '  Following $communityOrUserName'
-                              : Provider.of<SearchController>(context,
+                              : Provider.of<searchCtrl.SearchController>(
+                                          context,
                                           listen: false)
                                       .isWeb
                                   ? '  Successfully unfollowed $communityOrUserName'
                                   : '  You are no longer following $communityOrUserName'
-                          : Provider.of<SearchController>(context,
+                          : Provider.of<searchCtrl.SearchController>(context,
                                       listen: false)
                                   .isJoining[index]
-                              ? Provider.of<SearchController>(context,
+                              ? Provider.of<searchCtrl.SearchController>(
+                                          context,
                                           listen: false)
                                       .isWeb
                                   ? '  Successfully joined $communityOrUserName'
                                   : '  You have joined the $communityOrUserName community!'
-                              : Provider.of<SearchController>(context,
+                              : Provider.of<searchCtrl.SearchController>(
+                                          context,
                                           listen: false)
                                       .isWeb
                                   ? '  Successfully left $communityOrUserName'
@@ -120,15 +123,15 @@ class FollowJoinButtonWidget extends StatelessWidget {
             (Set<MaterialState> states) {
               //if App & not Following||not joining (according to the widget)==> grey
               //else App ==> white, web ==> light grey
-              return !Provider.of<SearchController>(context).isWeb &&
+              return !Provider.of<searchCtrl.SearchController>(context).isWeb &&
                           isPeopleWidget &&
-                          !Provider.of<SearchController>(context)
+                          !Provider.of<searchCtrl.SearchController>(context)
                               .isFollowing[index] ||
                       !isPeopleWidget &&
-                          !Provider.of<SearchController>(context)
+                          !Provider.of<searchCtrl.SearchController>(context)
                               .isJoining[index]
                   ? const Color.fromRGBO(0, 121, 211, 0.1)
-                  : Provider.of<SearchController>(context).isWeb
+                  : Provider.of<searchCtrl.SearchController>(context).isWeb
                       ? const Color.fromRGBO(0, 121, 211, 0.06)
                       : Colors.white;
             },
@@ -141,15 +144,18 @@ class FollowJoinButtonWidget extends StatelessWidget {
               side: BorderSide(
                 //if App & folloeing||joining (according to the widget)==>blue
                 //else ==>white
-                color: !Provider.of<SearchController>(context).isWeb &&
-                        (isPeopleWidget &&
-                                Provider.of<SearchController>(context)
-                                    .isFollowing[index] ||
-                            !isPeopleWidget &&
-                                Provider.of<SearchController>(context)
-                                    .isJoining[index])
-                    ? Colors.blue
-                    : Colors.white,
+                color:
+                    !Provider.of<searchCtrl.SearchController>(context).isWeb &&
+                            (isPeopleWidget &&
+                                    Provider.of<searchCtrl.SearchController>(
+                                            context)
+                                        .isFollowing[index] ||
+                                !isPeopleWidget &&
+                                    Provider.of<searchCtrl.SearchController>(
+                                            context)
+                                        .isJoining[index])
+                        ? Colors.blue
+                        : Colors.white,
               ),
             ),
           ),
@@ -158,10 +164,11 @@ class FollowJoinButtonWidget extends StatelessWidget {
           padding: EdgeInsets.symmetric(
             //if the text is longer(Following and Joined case) ==> make the padding cmaller
             horizontal: (isPeopleWidget &&
-                        Provider.of<SearchController>(context)
+                        Provider.of<searchCtrl.SearchController>(context)
                             .isFollowing[index]) ||
                     (!isPeopleWidget &&
-                        Provider.of<SearchController>(context).isJoining[index])
+                        Provider.of<searchCtrl.SearchController>(context)
+                            .isJoining[index])
                 ? 8.0
                 : 18.0,
             vertical: 10,
@@ -171,10 +178,11 @@ class FollowJoinButtonWidget extends StatelessWidget {
                 //////////////////////////
                 //people widget
                 //according to platform and following case (T/F) and hovering with the mouse in web
-                ? (!Provider.of<SearchController>(context).isFollowing[index])
+                ? (!Provider.of<searchCtrl.SearchController>(context)
+                        .isFollowing[index])
                     ? 'Follow'
-                    : Provider.of<SearchController>(context).isWeb
-                        ? Provider.of<SearchController>(context)
+                    : Provider.of<searchCtrl.SearchController>(context).isWeb
+                        ? Provider.of<searchCtrl.SearchController>(context)
                                 .isHoveredFollowButton[index]
                             ? 'UnFollow'
                             : 'Following'
@@ -182,10 +190,11 @@ class FollowJoinButtonWidget extends StatelessWidget {
                 //////////////////////////
                 //community widget
                 //according to platform and joining case (T/F) and hovering with the mouse in web
-                : (!Provider.of<SearchController>(context).isJoining[index])
+                : (!Provider.of<searchCtrl.SearchController>(context)
+                        .isJoining[index])
                     ? 'Join'
-                    : Provider.of<SearchController>(context).isWeb &&
-                            Provider.of<SearchController>(context)
+                    : Provider.of<searchCtrl.SearchController>(context).isWeb &&
+                            Provider.of<searchCtrl.SearchController>(context)
                                 .isHoveredJoinButton[index]
                         ? 'Leave'
                         : 'Joined',

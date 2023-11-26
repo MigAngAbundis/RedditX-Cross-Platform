@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 
 import 'trending_today_in_search.dart';
 
-import '../../../controllers/search_controller.dart';
+import '../../../controllers/search_controller.dart' as searchCtrl;
 
 ///The column of search hstory and Trending posts
 class SearchHostoryAndTrending extends StatelessWidget {
@@ -11,12 +11,15 @@ class SearchHostoryAndTrending extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return (Provider.of<SearchController>(context).restoreSearchHistory ==
+    return (Provider.of<searchCtrl.SearchController>(context)
+                    .restoreSearchHistory ==
                 null ||
-            Provider.of<SearchController>(context)
+            Provider.of<searchCtrl.SearchController>(context)
                 .restoreSearchHistory!
                 .isEmpty ||
-            Provider.of<SearchController>(context).restoreSearchHistory == null)
+            Provider.of<searchCtrl.SearchController>(context)
+                    .restoreSearchHistory ==
+                null)
         //if the stored list history is empty ==> show wtrending only
         ? const TrendingTodayInSearch()
         //if there is search history==> show it then show trending
@@ -30,7 +33,7 @@ class SearchHostoryAndTrending extends StatelessWidget {
                 shrinkWrap: true,
                 children: [
                   //call a function the builds the search history column
-                  ...Provider.of<SearchController>(context)
+                  ...Provider.of<searchCtrl.SearchController>(context)
                       .buildSearchHistoryColumn(),
                 ],
               ),

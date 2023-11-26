@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../controllers/search_controller.dart';
+import '../../../controllers/search_controller.dart' as searchCtrl;
 import '../../widgets/search/drop_down_menu.dart';
 
 ///Search results screen
@@ -37,7 +37,7 @@ class SearchScreenTwo extends StatelessWidget {
                         : tabController.index == 2
                             ? 'sr'
                             : 'user';
-                Provider.of<SearchController>(context, listen: false)
+                Provider.of<searchCtrl.SearchController>(context, listen: false)
                     .changeTab(tab);
               }
             },
@@ -78,7 +78,9 @@ class SearchScreenTwo extends StatelessWidget {
                               //blue line in App
                               //white rectangularCircle in web
                               indicator:
-                                  Provider.of<SearchController>(context).isWeb
+                                  Provider.of<searchCtrl.SearchController>(
+                                              context)
+                                          .isWeb
                                       ? ShapeDecoration(
                                           color: Colors.white,
                                           shape: RoundedRectangleBorder(
@@ -106,9 +108,12 @@ class SearchScreenTwo extends StatelessWidget {
                             const Spacer(),
 
                             ///Safe Search switch appears in web if the user allows NSFW content
-                            if (Provider.of<SearchController>(context)
+                            if (Provider.of<searchCtrl.SearchController>(
+                                        context)
                                     .allowNsfw &&
-                                Provider.of<SearchController>(context).isWeb)
+                                Provider.of<searchCtrl.SearchController>(
+                                        context)
+                                    .isWeb)
                               Row(
                                 children: [
                                   const Text(
@@ -122,11 +127,13 @@ class SearchScreenTwo extends StatelessWidget {
                                     thumbColor: Colors.white,
                                     activeColor: Colors.blue,
                                     trackColor: Colors.grey,
-                                    value:
-                                        Provider.of<SearchController>(context)
-                                            .safeSearch,
+                                    value: Provider.of<
+                                            searchCtrl
+                                            .SearchController>(context)
+                                        .safeSearch,
                                     onChanged: (val) {
-                                      Provider.of<SearchController>(context,
+                                      Provider.of<searchCtrl.SearchController>(
+                                              context,
                                               listen: false)
                                           .toggleSafeSearchState();
                                     },
@@ -143,18 +150,24 @@ class SearchScreenTwo extends StatelessWidget {
                             Container(
                               color: const Color.fromRGBO(135, 138, 140, 0.1),
                               alignment:
-                                  (Provider.of<SearchController>(context).isWeb)
+                                  (Provider.of<searchCtrl.SearchController>(
+                                              context)
+                                          .isWeb)
                                       ? Alignment.bottomCenter
                                       : Alignment.topCenter,
                               child: SizedBox(
-                                width: (Provider.of<SearchController>(context)
-                                        .isWeb)
-                                    ? constraint.maxWidth * 0.82
-                                    : constraint.maxWidth * 1,
-                                height: (Provider.of<SearchController>(context)
-                                        .isWeb)
-                                    ? constraint.maxHeight * 0.85
-                                    : constraint.maxHeight * 1,
+                                width:
+                                    (Provider.of<searchCtrl.SearchController>(
+                                                context)
+                                            .isWeb)
+                                        ? constraint.maxWidth * 0.82
+                                        : constraint.maxWidth * 1,
+                                height:
+                                    (Provider.of<searchCtrl.SearchController>(
+                                                context)
+                                            .isWeb)
+                                        ? constraint.maxHeight * 0.85
+                                        : constraint.maxHeight * 1,
                                 child: ListView(
                                   //WARNING ==> removing shrinkWrap will cause unBounded height runTime exception
                                   //because the column gives unBounded constraints
@@ -184,7 +197,8 @@ class SearchScreenTwo extends StatelessWidget {
                                       ],
                                     ),
                                     //call a function the builds the posts list
-                                    ...Provider.of<SearchController>(context)
+                                    ...Provider.of<searchCtrl.SearchController>(
+                                            context)
                                         .buildPostsInSearchListWidget(),
                                   ],
                                 ),
@@ -193,18 +207,24 @@ class SearchScreenTwo extends StatelessWidget {
                             Container(
                               color: const Color.fromRGBO(135, 138, 140, 0.1),
                               alignment:
-                                  (Provider.of<SearchController>(context).isWeb)
+                                  (Provider.of<searchCtrl.SearchController>(
+                                              context)
+                                          .isWeb)
                                       ? Alignment.bottomCenter
                                       : Alignment.topCenter,
                               child: SizedBox(
-                                width: (Provider.of<SearchController>(context)
-                                        .isWeb)
-                                    ? constraint.maxWidth * 0.82
-                                    : constraint.maxWidth * 1,
-                                height: (Provider.of<SearchController>(context)
-                                        .isWeb)
-                                    ? constraint.maxHeight * 0.85
-                                    : constraint.maxHeight * 1,
+                                width:
+                                    (Provider.of<searchCtrl.SearchController>(
+                                                context)
+                                            .isWeb)
+                                        ? constraint.maxWidth * 0.82
+                                        : constraint.maxWidth * 1,
+                                height:
+                                    (Provider.of<searchCtrl.SearchController>(
+                                                context)
+                                            .isWeb)
+                                        ? constraint.maxHeight * 0.85
+                                        : constraint.maxHeight * 1,
                                 child: ListView(
                                   //WARNING ==> removing shrinkWrap will cause unBounded height runTime exception
                                   //because the column gives unBounded constraints
@@ -212,7 +232,8 @@ class SearchScreenTwo extends StatelessWidget {
                                   shrinkWrap: true,
                                   children: [
                                     //call a function the builds the comments list
-                                    ...Provider.of<SearchController>(context)
+                                    ...Provider.of<searchCtrl.SearchController>(
+                                            context)
                                         .buildCommentsInSearchListWidget(),
                                   ],
                                 ),
@@ -221,18 +242,24 @@ class SearchScreenTwo extends StatelessWidget {
                             Container(
                               color: const Color.fromRGBO(135, 138, 140, 0.1),
                               alignment:
-                                  (Provider.of<SearchController>(context).isWeb)
+                                  (Provider.of<searchCtrl.SearchController>(
+                                              context)
+                                          .isWeb)
                                       ? Alignment.bottomCenter
                                       : Alignment.topCenter,
                               child: SizedBox(
-                                width: (Provider.of<SearchController>(context)
-                                        .isWeb)
-                                    ? constraint.maxWidth * 0.82
-                                    : constraint.maxWidth * 1,
-                                height: (Provider.of<SearchController>(context)
-                                        .isWeb)
-                                    ? constraint.maxHeight * 0.85
-                                    : constraint.maxHeight * 1,
+                                width:
+                                    (Provider.of<searchCtrl.SearchController>(
+                                                context)
+                                            .isWeb)
+                                        ? constraint.maxWidth * 0.82
+                                        : constraint.maxWidth * 1,
+                                height:
+                                    (Provider.of<searchCtrl.SearchController>(
+                                                context)
+                                            .isWeb)
+                                        ? constraint.maxHeight * 0.85
+                                        : constraint.maxHeight * 1,
                                 child: ListView(
                                   //WARNING ==> removing shrinkWrap will cause unBounded height runTime exception
                                   //because the column gives unBounded constraints
@@ -240,7 +267,8 @@ class SearchScreenTwo extends StatelessWidget {
                                   shrinkWrap: true,
                                   children: [
                                     //call a function the builds the communities list
-                                    ...Provider.of<SearchController>(context)
+                                    ...Provider.of<searchCtrl.SearchController>(
+                                            context)
                                         .buildCommunityInSearchListWidget(),
                                   ],
                                 ),
@@ -249,18 +277,24 @@ class SearchScreenTwo extends StatelessWidget {
                             Container(
                               color: const Color.fromRGBO(135, 138, 140, 0.1),
                               alignment:
-                                  (Provider.of<SearchController>(context).isWeb)
+                                  (Provider.of<searchCtrl.SearchController>(
+                                              context)
+                                          .isWeb)
                                       ? Alignment.bottomCenter
                                       : Alignment.topCenter,
                               child: SizedBox(
-                                width: (Provider.of<SearchController>(context)
-                                        .isWeb)
-                                    ? constraint.maxWidth * 0.82
-                                    : constraint.maxWidth * 1,
-                                height: (Provider.of<SearchController>(context)
-                                        .isWeb)
-                                    ? constraint.maxHeight * 0.85
-                                    : constraint.maxHeight * 1,
+                                width:
+                                    (Provider.of<searchCtrl.SearchController>(
+                                                context)
+                                            .isWeb)
+                                        ? constraint.maxWidth * 0.82
+                                        : constraint.maxWidth * 1,
+                                height:
+                                    (Provider.of<searchCtrl.SearchController>(
+                                                context)
+                                            .isWeb)
+                                        ? constraint.maxHeight * 0.85
+                                        : constraint.maxHeight * 1,
                                 child: ListView(
                                   //WARNING ==> removing shrinkWrap will cause unBounded height runTime exception
                                   //because the column gives unBounded constraints
@@ -268,7 +302,8 @@ class SearchScreenTwo extends StatelessWidget {
                                   shrinkWrap: true,
                                   children: [
                                     //call a function the builds the people list
-                                    ...Provider.of<SearchController>(context)
+                                    ...Provider.of<searchCtrl.SearchController>(
+                                            context)
                                         .buildPeopleInSearchListWidget(),
                                   ],
                                 ),

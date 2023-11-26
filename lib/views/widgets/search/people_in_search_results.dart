@@ -5,7 +5,7 @@ import '../../../methods/circular_omage_widget.dart';
 import 'follow_join_button_in_search_rsults.dart';
 import 'username_communityname.dart';
 
-import '../../../controllers/search_controller.dart';
+import '../../../controllers/search_controller.dart' as searchCtrl;
 import '../../../models/search_model.dart';
 
 ///people Widget in search results comments tab
@@ -68,7 +68,8 @@ class PeopleSearchResult extends StatelessWidget {
       child: Column(
         children: [
           SizedBox(
-            height: Provider.of<SearchController>(context).isWeb ? 0 : 5,
+            height:
+                Provider.of<searchCtrl.SearchController>(context).isWeb ? 0 : 5,
           ),
           Row(
             children: [
@@ -90,7 +91,8 @@ class PeopleSearchResult extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: Provider.of<SearchController>(context).isWeb
+                  children: Provider.of<searchCtrl.SearchController>(context)
+                          .isWeb
                       ///////////////////////////////////WEB///////////////////////////////////
                       ? personData.about.isNotEmpty
                           //if about text is not empty

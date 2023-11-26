@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../screens/search/search_screen_two.dart';
 
-import '../../../controllers/search_controller.dart';
+import '../../../controllers/search_controller.dart' as searchCtrl;
 
 class SearchHistoryWidget extends StatelessWidget {
   ///The text that will be passed to the widget to show
@@ -25,7 +25,7 @@ class SearchHistoryWidget extends StatelessWidget {
     return GestureDetector(
       key: Key('search_history_item_${myIndex}_click'),
       onTap: () {
-        Provider.of<SearchController>(context, listen: false)
+        Provider.of<searchCtrl.SearchController>(context, listen: false)
             .searchHistoryClicked(textToShow, myIndex);
 
         ///Go to search results screen
@@ -39,10 +39,10 @@ class SearchHistoryWidget extends StatelessWidget {
             Icon(
               //in web ==> search icon with black color
               //in App ==> access_Time icon with grey color
-              Provider.of<SearchController>(context).isWeb
+              Provider.of<searchCtrl.SearchController>(context).isWeb
                   ? Icons.search
                   : Icons.access_time,
-              color: Provider.of<SearchController>(context).isWeb
+              color: Provider.of<searchCtrl.SearchController>(context).isWeb
                   ? Colors.black
                   : Colors.grey,
             ),
@@ -58,13 +58,13 @@ class SearchHistoryWidget extends StatelessWidget {
                   'search_history_item_${myIndex}_delete',
                 ),
                 Icons.close,
-                color: Provider.of<SearchController>(context).isWeb
+                color: Provider.of<searchCtrl.SearchController>(context).isWeb
                     ? Colors.black
                     : Colors.grey,
               ),
               onPressed: () {
                 //call the function that deletes the item from the list and modify the list
-                Provider.of<SearchController>(context, listen: false)
+                Provider.of<searchCtrl.SearchController>(context, listen: false)
                     .deleteSearchHistory(myIndex);
               },
             ),

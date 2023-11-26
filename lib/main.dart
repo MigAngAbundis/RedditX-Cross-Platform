@@ -21,7 +21,7 @@ import 'views/screens/create_community/create_community_screen.dart';
 
 import 'views/screens/search/search_screen_one.dart';
 import 'views/screens/search/search_screen_two.dart';
-import 'controllers/search_controller.dart';
+import 'controllers/search_controller.dart' as searchCtrl;
 
 import 'models/post_model.dart';
 import 'controllers/profile_controller.dart';
@@ -87,7 +87,7 @@ class MyApp extends StatelessWidget {
             create: (context) =>
                 CommunityProvider(communityService: CommunityService())),
         ChangeNotifierProvider(
-          create: (context) => SearchController(),
+          create: (context) => searchCtrl.SearchController(),
         ),
         ChangeNotifierProvider(
           create: (context) => SettingsViewModelMobileController(),

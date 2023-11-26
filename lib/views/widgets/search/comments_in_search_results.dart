@@ -6,7 +6,7 @@ import 'community_icon_and_2lines_app.dart';
 import 'community_icon_and_2lines_web.dart';
 import 'upvotes_and_comments.dart';
 
-import '../../../controllers/search_controller.dart';
+import '../../../controllers/search_controller.dart' as searchCtrl;
 import '../../../models/search_model.dart';
 
 ///Comment Widget in search results comments tab
@@ -24,11 +24,11 @@ class CommentsSearchResult extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ///Age of the post
-    String postShownDate = Provider.of<SearchController>(context)
+    String postShownDate = Provider.of<searchCtrl.SearchController>(context)
         .calculateAge(commentData.postData.createdAt);
 
     ///Age of the comment
-    String commentShownDate = Provider.of<SearchController>(context)
+    String commentShownDate = Provider.of<searchCtrl.SearchController>(context)
         .calculateAge(commentData.createdAt);
 
     return Container(
@@ -39,7 +39,7 @@ class CommentsSearchResult extends StatelessWidget {
           const SizedBox(
             height: 5,
           ),
-          Provider.of<SearchController>(context).isWeb
+          Provider.of<searchCtrl.SearchController>(context).isWeb
               ////////////////////WEB////////////////////
               ? Row(
                   children: [
@@ -95,7 +95,7 @@ class CommentsSearchResult extends StatelessWidget {
               vertical: 10,
             ),
             padding: const EdgeInsets.all(10),
-            color: Provider.of<SearchController>(context).isWeb
+            color: Provider.of<searchCtrl.SearchController>(context).isWeb
                 ? const Color.fromRGBO(173, 216, 230, 0.4)
                 : const Color.fromRGBO(135, 138, 140, 0.2),
             child: Column(
@@ -115,7 +115,8 @@ class CommentsSearchResult extends StatelessWidget {
                       style: TextStyle(
                         fontWeight: FontWeight.w400,
                         fontSize: 12,
-                        color: Provider.of<SearchController>(context).isWeb
+                        color: Provider.of<searchCtrl.SearchController>(context)
+                                .isWeb
                             ? Colors.black
                             : const Color.fromRGBO(124, 124, 124, 1),
                       ),
@@ -131,15 +132,20 @@ class CommentsSearchResult extends StatelessWidget {
                   ],
                 ),
                 SizedBox(
-                  height: Provider.of<SearchController>(context).isWeb ? 10 : 5,
+                  height:
+                      Provider.of<searchCtrl.SearchController>(context).isWeb
+                          ? 10
+                          : 5,
                 ),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     SizedBox(
-                      width:
-                          Provider.of<SearchController>(context).isWeb ? 25 : 0,
+                      width: Provider.of<searchCtrl.SearchController>(context)
+                              .isWeb
+                          ? 25
+                          : 0,
                     ),
                     Expanded(
                       child: Column(
@@ -148,14 +154,16 @@ class CommentsSearchResult extends StatelessWidget {
                         children: [
                           Text(
                             key: const Key('comment_content'),
-                            maxLines:
-                                Provider.of<SearchController>(context).isWeb
-                                    ? null
-                                    : 9,
-                            overflow:
-                                Provider.of<SearchController>(context).isWeb
-                                    ? null
-                                    : TextOverflow.fade,
+                            maxLines: Provider.of<searchCtrl.SearchController>(
+                                        context)
+                                    .isWeb
+                                ? null
+                                : 9,
+                            overflow: Provider.of<searchCtrl.SearchController>(
+                                        context)
+                                    .isWeb
+                                ? null
+                                : TextOverflow.fade,
                             textAlign: TextAlign.start,
                             commentData.commentText,
                             style: const TextStyle(
@@ -165,7 +173,9 @@ class CommentsSearchResult extends StatelessWidget {
                             ),
                           ),
                           SizedBox(
-                            height: Provider.of<SearchController>(context).isWeb
+                            height: Provider.of<searchCtrl.SearchController>(
+                                        context)
+                                    .isWeb
                                 ? 10
                                 : 5,
                           ),
@@ -221,7 +231,7 @@ class CommentsSearchResult extends StatelessWidget {
                       ),
                     ),
                     child: Text(
-                      Provider.of<SearchController>(context).isWeb
+                      Provider.of<searchCtrl.SearchController>(context).isWeb
                           ? 'Go to thread'
                           : 'Go to Comment',
                       style: const TextStyle(

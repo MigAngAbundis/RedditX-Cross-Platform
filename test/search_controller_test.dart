@@ -1,14 +1,15 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
-import 'package:search_project/controllers/search_controller.dart';
+import 'package:search_project/controllers/search_controller.dart'
+    as searchCtrl;
 import 'package:search_project/models/search_model.dart';
 
 void main() {
-  late SearchController sut;
+  late searchCtrl.SearchController sut;
 
 //stup method will run before each and every test
   setUp(() {
-    sut = SearchController();
+    sut = searchCtrl.SearchController();
     peoplesListData = peoplesListDataMock;
     postsListData = postsListDataMock;
     commentssListData = commentssListDataMock;
@@ -251,7 +252,7 @@ void main() {
       expect(sut.enabledBorderColor(), Colors.blue);
     });
   });
-   group('test calculate age function and formatting it', () {
+  group('test calculate age function and formatting it', () {
     test('Time is more than or equal one year', () {
       sut.isWeb = true;
       String shownDate = sut.calculateAge(DateTime(2020, 10, 30));

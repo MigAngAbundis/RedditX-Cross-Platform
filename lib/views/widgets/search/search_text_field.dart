@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../screens/search/search_screen_two.dart';
 
-import '../../../controllers/search_controller.dart';
+import '../../../controllers/search_controller.dart' as searchCtrl;
 
 ///Search input text field
 class SearchTextFieldWidget extends StatelessWidget {
@@ -15,32 +15,35 @@ class SearchTextFieldWidget extends StatelessWidget {
     return MouseRegion(
       onHover: (_) {
         // when the user hover with the mouse on that region ==> to change the colors
-        Provider.of<SearchController>(context, listen: false)
+        Provider.of<searchCtrl.SearchController>(context, listen: false)
             .onHoverTextField();
       },
       onExit: (_) {
         // when the user move the mouse outside the text field region
-        Provider.of<SearchController>(context, listen: false).onExitTextField();
+        Provider.of<searchCtrl.SearchController>(context, listen: false)
+            .onExitTextField();
       },
       child: TextField(
         key: const Key('search_input'),
         //when the user tap on the text field
         onTap: () {
-          Provider.of<SearchController>(
+          Provider.of<searchCtrl.SearchController>(
             context,
             listen: false,
           ).onTapTextField();
         },
 
         ///user input will be stored in this controller
-        controller:
-            Provider.of<SearchController>(context).searchTextFieldcontroller,
+        controller: Provider.of<searchCtrl.SearchController>(context)
+            .searchTextFieldcontroller,
         decoration: InputDecoration(
           filled: true, //to can assign filled color
           fillColor: //color of the text field background
-              Provider.of<SearchController>(context).fillColorTextField(),
+              Provider.of<searchCtrl.SearchController>(context)
+                  .fillColorTextField(),
           hoverColor: // color of the text field whrn it is hovered with the mouse
-              Provider.of<SearchController>(context).hoverColorTextField(),
+              Provider.of<searchCtrl.SearchController>(context)
+                  .hoverColorTextField(),
           focusedBorder: OutlineInputBorder(
               // when click inside the text field
               borderRadius: BorderRadius.only(
@@ -49,27 +52,31 @@ class SearchTextFieldWidget extends StatelessWidget {
                 //20 in the web bottom if the user clicked outside the field
                 topLeft: Radius.circular(
                     //get the radius from the provider ==> according to the platform
-                    Provider.of<SearchController>(context).borderRadius),
+                    Provider.of<searchCtrl.SearchController>(context)
+                        .borderRadius),
                 topRight: Radius.circular(
-                    Provider.of<SearchController>(context).borderRadius),
+                    Provider.of<searchCtrl.SearchController>(context)
+                        .borderRadius),
                 bottomLeft: Radius.circular(
                     //get the radius from the provider ==> according to the platform
-                    Provider.of<SearchController>(context).bottomborderRadius),
+                    Provider.of<searchCtrl.SearchController>(context)
+                        .bottomborderRadius),
                 bottomRight: Radius.circular(
-                    Provider.of<SearchController>(context).bottomborderRadius),
+                    Provider.of<searchCtrl.SearchController>(context)
+                        .bottomborderRadius),
               ),
               borderSide: BorderSide(
-                color: Provider.of<SearchController>(context)
+                color: Provider.of<searchCtrl.SearchController>(context)
                     .focusBorderColorTextField(),
               )),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(
                 //0 in App==> rectangular
                 //20 in web==> circular
-                Provider.of<SearchController>(context).borderRadius),
+                Provider.of<searchCtrl.SearchController>(context).borderRadius),
             borderSide: BorderSide(
-              color:
-                  Provider.of<SearchController>(context).enabledBorderColor(),
+              color: Provider.of<searchCtrl.SearchController>(context)
+                  .enabledBorderColor(),
             ),
           ),
           hintText: 'Search Reddit',
@@ -84,9 +91,9 @@ class SearchTextFieldWidget extends StatelessWidget {
           ///Clear icon at the end of the text field
           suffixIcon: IconButton(
             key: const Key('clear_text_field_icon'),
-            icon: Provider.of<SearchController>(context).closeIcon,
+            icon: Provider.of<searchCtrl.SearchController>(context).closeIcon,
             onPressed: () {
-              Provider.of<SearchController>(context, listen: false)
+              Provider.of<searchCtrl.SearchController>(context, listen: false)
                   .textFieldSuffixOnPressed();
             },
           ),
@@ -99,17 +106,18 @@ class SearchTextFieldWidget extends StatelessWidget {
         //check whether to make text appear from RTL or LTR
         //in web it is always RTL
         //in App it changes according to input language
-        textDirection: Provider.of<SearchController>(context).isRTLText
-            ? TextDirection.rtl
-            : TextDirection.ltr,
+        textDirection:
+            Provider.of<searchCtrl.SearchController>(context).isRTLText
+                ? TextDirection.rtl
+                : TextDirection.ltr,
         //The function that will be called when the user enter the text he want to search for
         onSubmitted: (searchInput) {
           //check that the user is not sumbitted empty text
-          if (Provider.of<SearchController>(context, listen: false)
+          if (Provider.of<searchCtrl.SearchController>(context, listen: false)
               .searchTextFieldcontroller
               .text
               .isNotEmpty) {
-            Provider.of<SearchController>(context, listen: false)
+            Provider.of<searchCtrl.SearchController>(context, listen: false)
                 .onSubmittingTextField(searchInput);
 
             ///Go to search results screen when submit input
@@ -120,7 +128,7 @@ class SearchTextFieldWidget extends StatelessWidget {
 
         ///When the input text is changing
         onChanged: (_) {
-          Provider.of<SearchController>(context, listen: false)
+          Provider.of<searchCtrl.SearchController>(context, listen: false)
               .onChangeTextField();
         },
       ),

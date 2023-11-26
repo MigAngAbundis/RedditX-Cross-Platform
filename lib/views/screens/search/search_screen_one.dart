@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import '../../widgets/search/search_text_field.dart';
 import '../../widgets/search/search_history_and_trending.dart';
 
-import '../../../controllers/search_controller.dart';
+import '../../../controllers/search_controller.dart' as searchCtrl;
 
 ///The screen of entering search input
 ///This class is Stateful to can call [initState()] to restore search results
@@ -28,7 +28,7 @@ class SearchScreenOneState extends State {
     Future.delayed(
       Duration.zero,
       () {
-        Provider.of<SearchController>(context, listen: false)
+        Provider.of<searchCtrl.SearchController>(context, listen: false)
             .getSearchHistory();
       },
     );
@@ -43,8 +43,8 @@ class SearchScreenOneState extends State {
           children: [
             //in web ==> text field only
             //in App ==> arrow_back button + text field
-            !Provider.of<SearchController>(context).isWeb &&
-                    Provider.of<SearchController>(context).isTapped
+            !Provider.of<searchCtrl.SearchController>(context).isWeb &&
+                    Provider.of<searchCtrl.SearchController>(context).isTapped
                 ? SizedBox(
                     height: (MediaQuery.of(context).size.height -
                             MediaQuery.of(context).padding.top) *
@@ -55,7 +55,7 @@ class SearchScreenOneState extends State {
                         IconButton(
                           onPressed: () {
                             //when the user tap outside the search field
-                            Provider.of<SearchController>(
+                            Provider.of<searchCtrl.SearchController>(
                               context,
                               listen: false,
                             ).onExitTapTextField();
@@ -79,14 +79,14 @@ class SearchScreenOneState extends State {
                   ),
 
             //when the field is tapped in web the search history list is shown over the home page
-            Provider.of<SearchController>(context).isTapped &&
-                    Provider.of<SearchController>(context).isWeb
+            Provider.of<searchCtrl.SearchController>(context).isTapped &&
+                    Provider.of<searchCtrl.SearchController>(context).isWeb
                 ? Stack(
                     alignment: Alignment.topCenter,
                     children: [
                       GestureDetector(
                         onTap: () {
-                          Provider.of<SearchController>(
+                          Provider.of<searchCtrl.SearchController>(
                             context,
                             listen: false,
                           ).onExitTapTextField();
@@ -107,8 +107,8 @@ class SearchScreenOneState extends State {
                     ],
                   )
                 //when we tap the search field in App we go to the screen the contains the search results
-                : Provider.of<SearchController>(context).isTapped &&
-                        !Provider.of<SearchController>(context).isWeb
+                : Provider.of<searchCtrl.SearchController>(context).isTapped &&
+                        !Provider.of<searchCtrl.SearchController>(context).isWeb
                     ? SizedBox(
                         width: MediaQuery.of(context).size.width,
                         child: const SearchHostoryAndTrending(),

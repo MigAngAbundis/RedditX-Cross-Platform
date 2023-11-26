@@ -6,7 +6,7 @@ import '../../../methods/circular_omage_widget.dart';
 import 'follow_join_button_in_search_rsults.dart';
 import 'username_communityname.dart';
 
-import '../../../controllers/search_controller.dart';
+import '../../../controllers/search_controller.dart' as searchCtrl;
 import '../../../models/search_model.dart';
 
 ///Comment Widget in search results comments tab
@@ -51,7 +51,8 @@ class CommunitiesSearchResult extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: Provider.of<SearchController>(context).isWeb
+                  children: Provider.of<searchCtrl.SearchController>(context)
+                          .isWeb
                       ///////////////////////////////////WEB///////////////////////////////////
                       ? communityData.about.isEmpty
                           //if about text is empty ==> make the name in the middle of the widget vertically

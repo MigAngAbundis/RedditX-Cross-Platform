@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../models/search_model.dart';
-import '../../../controllers/search_controller.dart';
+import '../../../controllers/search_controller.dart' as searchCtrl;
 
 ///The row that views the number of comments and upvotes
 class UpVotesAndComments extends StatelessWidget {
@@ -22,7 +22,7 @@ class UpVotesAndComments extends StatelessWidget {
       children: [
         Text(
           textAlign: TextAlign.start,
-          !Provider.of<SearchController>(context).isWeb && isPost
+          !Provider.of<searchCtrl.SearchController>(context).isWeb && isPost
               //////////App in post////////
               //formatting comments appearance
               ? postData.votesCount > 0
@@ -51,7 +51,7 @@ class UpVotesAndComments extends StatelessWidget {
         ),
         Text(
           textAlign: TextAlign.start,
-          !Provider.of<SearchController>(context).isWeb && isPost
+          !Provider.of<searchCtrl.SearchController>(context).isWeb && isPost
               ? //////////App in post////////
               //formatting comments appearance
               '  ${postData.commentsCount} comments'

@@ -8,7 +8,7 @@ import 'community_icon_and_2lines_app.dart';
 import 'community_icon_and_2lines_web.dart';
 import 'upvotes_and_comments.dart';
 
-import '../../../controllers/search_controller.dart';
+import '../../../controllers/search_controller.dart' as searchCtrl;
 import '../../../models/search_model.dart';
 
 class PostsSearchResult extends StatelessWidget {
@@ -28,9 +28,9 @@ class PostsSearchResult extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ///Post age
-    String shownDate =
-        Provider.of<SearchController>(context).calculateAge(postData.createdAt);
-    return !Provider.of<SearchController>(context).isWeb
+    String shownDate = Provider.of<searchCtrl.SearchController>(context)
+        .calculateAge(postData.createdAt);
+    return !Provider.of<searchCtrl.SearchController>(context).isWeb
         /////////////////////////////APP////////////////////////////
         ? Container(
             color: Colors.white,

@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../controllers/search_controller.dart';
+import '../../../controllers/search_controller.dart' as searchCtrl;
 
 ///Menu of sort options
 class DropDownMneu extends StatelessWidget {
@@ -26,7 +26,8 @@ class DropDownMneu extends StatelessWidget {
       iconDisabledColor: const Color.fromRGBO(135, 138, 140, 0.1),
       disabledHint: const Text('sort'),
       hint: const Text('sort'),
-      value: Provider.of<SearchController>(context).sortDropDownValue,
+      value:
+          Provider.of<searchCtrl.SearchController>(context).sortDropDownValue,
       items: itemsList.map<DropdownMenuItem<String>>((String value) {
         return DropdownMenuItem<String>(
           ///value is the text that will be sent to the BE
@@ -50,7 +51,7 @@ class DropDownMneu extends StatelessWidget {
         );
       }).toList(),
       onChanged: (String? newValue) {
-        Provider.of<SearchController>(
+        Provider.of<searchCtrl.SearchController>(
           context,
           listen: false,
         ).changSortType(newValue);
